@@ -49,17 +49,13 @@ class GameScene: SKScene {
     func button(){
         var button = SKSpriteNode(imageNamed: "buttton")
         button.position = CGPoint(x: (self.size.width * 0.10), y: (self.size.height * 0.10))
+        button.scale(to: CGSize(width: 50, height: 50))
         addChild(button)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        if let location = touch?.location(in: self) {
-            for node in self.nodes(at: location) {
-                if node.name == "buttton"{
-                    node.removeFromParent()
-                }
-            }
+        for touch in touches{
+            let location = location.
         }
     
 }

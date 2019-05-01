@@ -42,12 +42,7 @@ class GameViewController: UIViewController, SKSceneDelegate {
    
    
  
-    @IBAction func spawnButton(_ sender: UIButton) {
-        let game = GameScene(fileNamed: "GameScene")
-        game!.spawnEnemies()
-        
-        
-    }
+   
     
     
     
