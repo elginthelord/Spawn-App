@@ -18,7 +18,7 @@ import GameplayKit
 }
         class GameScene: SKScene, SKPhysicsContactDelegate {
    
-    var player = SKSpriteNode(imageNamed: "hero")
+    var player = SKSpriteNode(imageNamed: "hero1")
             
     override func didMove(to view: SKView) {
         backgroundColor = UIColor.white
