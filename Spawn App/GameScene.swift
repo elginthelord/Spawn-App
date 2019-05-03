@@ -81,7 +81,7 @@ import GameplayKit
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else{ return}
         }
-    let touchLocation = touch.location(in: self)
+    let touchLocation = UITouch.location(in: self)
     let fireBall = SKSpriteNode(imageNamed: "fireball")
     fireBall.position = player.position
     fireBall.physicsBody = SKPhysicsBody(rectangleOf: fireBall.size)
