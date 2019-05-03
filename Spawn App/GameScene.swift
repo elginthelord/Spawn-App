@@ -9,11 +9,17 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
-    
-    
+    struct PhysicsCategory{
+        static let none: UInt32 = 0
+        static let all: UInt32 = UInt32.max
+        static let enemies: UInt32 = 2 // #1
+        static let fireBall: UInt32 = 4 // #2
+        static let player: UInt32 = 1
+}
+        class GameScene: SKScene, SKPhysicsContactDelegate {
    
-    
+    var player = SKSpriteNode(imageNamed: "hero1")
+            
     override func didMove(to view: SKView) {
       backgroundColor = UIColor.white
       
@@ -25,7 +31,7 @@ class GameScene: SKScene {
     
     func spawnEnemies() {
         
-        var enemy1 = SKSpriteNode(imageNamed: "testenemy2") 
+        var enemy1 = SKSpriteNode(imageNamed: "enemyImage") 
         var enemy2 = SKSpriteNode(imageNamed: "testenemy")
        var random = Int.random(in: 0...1)
        
