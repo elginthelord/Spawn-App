@@ -8,7 +8,7 @@
 
 import SpriteKit
 import GameplayKit
-//
+
     struct PhysicsCategory{
         static let none: UInt32 = 0
         static let all: UInt32 = UInt32.max
@@ -35,7 +35,7 @@ import GameplayKit
     func spawnEnemies() {
         
         var enemy1 = SKSpriteNode(imageNamed: "enemyImage") 
-        var enemy2 = SKSpriteNode(imageNamed: "testenemy")
+        var enemy2 = SKSpriteNode(imageNamed: "enemy2")
        var random = Int.random(in: 0...1)
        
         var enemies: [SKSpriteNode] = [enemy1, enemy2]
