@@ -10,15 +10,20 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-class GameViewController: UIViewController, SKSceneDelegate {
+class GameViewController: UIViewController {
 
     
     
-    var ok = SKScene()
+    var gameScene:GameScene?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ok.delegate = self 
+       
+       
+        //creating a gamescene the size as the same of the viewcontroller
+        
+        
+        
         
         //creating a gamescene the size as the same of the viewcontroller
         let scene = GameScene(size: view.bounds.size)
@@ -38,11 +43,56 @@ class GameViewController: UIViewController, SKSceneDelegate {
         SKView.showsFPS = true
         SKView.showsNodeCount = true
         
+        
+        //converting the viewcontroller into an SKview
+       // let SKView = self.view as! SKView
+      /*
+        if let view = self.view as! SKView? {
+            guard let scene = SKScene(fileNamed: "GameScene") else {
+                return
+            }
+             scene.scaleMode = .resizeFill
+            
+            gameScene = scene as! GameScene
+            
+            
+            
+            view.presentScene(scene)
+            
+            
+            view.ignoresSiblingOrder = true
+            view.showsFPS = true
+            view.showsNodeCount = true
+            
+        }*/
+    /*    SKView.presentScene(scene)
+        
+        
+        SKView.ignoresSiblingOrder = true
+        SKView.showsFPS = true
+        SKView.showsNodeCount = true
+        */
+        // Set the scale mode to scale to fit the window
+       
+        
+        // Present the scene
+        
+        
     }
    
-   
+ /*   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        let location = touch?.location(in: gameScene!)
+        
+        let node : SKNode = gameScene!.atPoint(location!)
+    }*/
  
-   
+    @IBAction func spawButton(_ sender: UIButton) {
+        gameScene?.spawnEnemies()
+        print("SPAWNED")
+    }
+    
+    
     
     
     
