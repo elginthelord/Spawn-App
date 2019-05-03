@@ -80,27 +80,28 @@ import GameplayKit
 }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else{ return}
-        }
-    let touchLocation = UITouch.location(in: self)
+        
+    let touchLocation = touch.location(in: self)
     let fireBall = SKSpriteNode(imageNamed: "fireball")
     fireBall.position = player.position
     fireBall.physicsBody = SKPhysicsBody(rectangleOf: fireBall.size)
     fireBall.physicsBody?.mass = 1
     fireBall.physicsBody?.categoryBitMask = PhysicsCategory.fireBall
-    fireBall.physicsBody?.contactTestBitMask = PhysicsCategory.monster
+    fireBall.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
     fireBall.physicsBody?.collisionBitMask = PhysicsCategory.none
     fireBall.physicsBody?.isDynamic = true
     addChild(fireBall)
-    let offset = touchLocation - fireBall.position
+   /* let offset = touchLocation - fireBall.position
     let direction = offset.normalized()
     let shootAmount = direction * 1000
     let realDest = shootAmount + fireBall.position
     let actionMoved = SKAction.move(to: realDest, duration: TimeInterval(2.0))
     let actionMovedDone = SKAction.removeFromParent()
-    fireBall.run(SKAction.sequence([actionMoved, actionMovedDone]))
+    fireBall.run(SKAction.sequence([actionMoved, actionMovedDone])) */
 }
     
     
     
 
 
+}
