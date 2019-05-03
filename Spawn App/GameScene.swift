@@ -40,7 +40,7 @@ import GameplayKit
        
         var enemies: [SKSpriteNode] = [enemy1, enemy2]
        
-        enemy1.position = CGPoint(x: (self.size.width * 0.50) , y: (self.size.height * 0.50))
+        enemy1.position = CGPoint(x: (self.size.width * 0.70) , y: (self.size.height * 0.70))
           enemy2.position = CGPoint(x: (self.size.width * 0.50) , y: (self.size.height * 0.50))
         
         enemy1.scale(to: CGSize(width: 50, height: 50))
