@@ -19,16 +19,19 @@ import GameplayKit
         class GameScene: SKScene, SKPhysicsContactDelegate {
    
     var player = SKSpriteNode(imageNamed: "hero1")
+    
+            
+            
             
     override func didMove(to view: SKView) {
       backgroundColor = UIColor.white
       
+       
         
         
        
         }
  
-    
     func spawnEnemies() {
         
         var enemy1 = SKSpriteNode(imageNamed: "enemyImage") 
@@ -38,14 +41,18 @@ import GameplayKit
         var enemies: [SKSpriteNode] = [enemy1, enemy2]
         
         
-        enemy1.position = CGPoint(x: (self.size.width * 0.50) , y: (self.size.height * 0.50))
-          enemy2.position = CGPoint(x: (self.size.width * 0.50) , y: (self.size.height * 0.50))
+        enemy1.position = CGPoint(x: (self.size.width * 0.40) , y: (self.size.height * 0.40))
+          enemy2.position = CGPoint(x: (self.size.width * 0.40) , y: (self.size.height * 0.40))
         
         enemy1.scale(to: CGSize(width: 50, height: 50))
         enemy2.scale(to: CGSize(width: 50, height: 50))
         
+        enemy1.physicsBody? = SKPhysicsBody(rectangleOf: enemy1.size)
+        enemy2.physicsBody? = SKPhysicsBody(rectangleOf: enemy2.size)
+        
         enemy2.physicsBody?.affectedByGravity = false
         enemy1.physicsBody?.affectedByGravity = false
+        
         
         addChild(enemies[random])
         
