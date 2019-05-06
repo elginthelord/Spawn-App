@@ -19,7 +19,9 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        
        
+        
         //creating a gamescene the size as the same of the viewcontroller
         
         
@@ -27,6 +29,8 @@ class GameViewController: UIViewController {
         
         //creating a gamescene the size as the same of the viewcontroller
         let scene = GameScene(size: view.bounds.size)
+        
+        gameScene = scene as! GameScene
         
         //converting the viewcontroller into an SKview
         let SKView = self.view as! SKView
@@ -89,12 +93,22 @@ class GameViewController: UIViewController {
  
     @IBAction func spawButton(_ sender: UIButton) {
         gameScene?.spawnEnemies()
+   
+        
         print("SPAWNED")
     }
     
     
     
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (self.isMovingFromParent) {
+            UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
+        }
+    }
+ 
     
     
     override var prefersStatusBarHidden: Bool {
