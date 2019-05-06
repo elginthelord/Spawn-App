@@ -51,7 +51,7 @@ import GameplayKit
         
     }
     func createHealthBar(){ //creates health bar for enemies and home base
-                
+    //SKAction.repeatForever(SKAction.sequence([SKAction.moveByX(moveAmount, y: 0, duration: 0.5), SKAction.waitForDuration(0.5)]))
             }
     
     
