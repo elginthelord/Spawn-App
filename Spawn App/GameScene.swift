@@ -9,6 +9,7 @@
 import SpriteKit
 import GameplayKit
 
+
     struct PhysicsCategory{
         static let none: UInt32 = 0
         static let all: UInt32 = UInt32.max
@@ -85,7 +86,8 @@ import GameplayKit
                 
             }
     func createHealthBar(){ //creates health bar for enemies and home base
-                
+        
+        
             }
     
     
@@ -96,3 +98,4 @@ import GameplayKit
     
     
 }
+
