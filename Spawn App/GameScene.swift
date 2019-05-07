@@ -9,6 +9,7 @@
 import SpriteKit
 import GameplayKit
 
+
     struct PhysicsCategory{
         static let none: UInt32 = 0
         static let all: UInt32 = UInt32.max
@@ -42,7 +43,7 @@ import GameplayKit
         
         
         enemy1.position = CGPoint(x: (self.size.width * 0.40) , y: (self.size.height * 0.40))
-          enemy2.position = CGPoint(x: (self.size.width * 0.40) , y: (self.size.height * 0.40))
+        enemy2.position = CGPoint(x: (self.size.width * 0.40) , y: (self.size.height * 0.40))
         
         enemy1.scale(to: CGSize(width: 50, height: 50))
         enemy2.scale(to: CGSize(width: 50, height: 50))
@@ -71,3 +72,4 @@ import GameplayKit
     
     
 }
+
