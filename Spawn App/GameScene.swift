@@ -59,11 +59,7 @@ import GameplayKit
         
         
     }
-    func createHealthBar(){ //creates health bar for enemies and home base
         
-        
-            }
-    
     
     
    
