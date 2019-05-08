@@ -78,7 +78,6 @@ import GameplayKit
                  hero3.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
                  hero4.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
                 
-                hero1.zRotation = CGFloat.pi/2
                 addChild(heroes[random])
             }
             
@@ -97,6 +96,8 @@ import GameplayKit
                 fireBall.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
                 fireBall.physicsBody?.collisionBitMask = PhysicsCategory.none
                 fireBall.physicsBody?.isDynamic = true
+                fireBall.scale(to: CGSize(width: 35, height: 35))
+                fireBall.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
                 addChild(fireBall)
                 let offset = locationTouch - fireBall.position
                 let direction = offset.normalized()
