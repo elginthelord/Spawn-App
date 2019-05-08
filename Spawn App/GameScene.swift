@@ -26,7 +26,7 @@ import GameplayKit
             
     override func didMove(to view: SKView) {
       backgroundColor = UIColor.white
-      
+      homeBase()
        
         }
  
@@ -80,7 +80,18 @@ import GameplayKit
                 
                 addChild(heroes[random])
             }
+            func homeBase(){
+            let homebase = SKSpriteNode(imageNamed: "homeImage")
+            homebase.physicsBody = SKPhysicsBody(rectangleOf: homebase.size)
+            homebase.physicsBody?.mass = 1.5
+            homebase.physicsBody?.collisionBitMask = PhysicsCategory.enemies
+            homebase.physicsBody?.categoryBitMask = PhysicsCategory.none
+            homebase.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
+            homebase.physicsBody?.isDynamic = true
+            homebase.scale(to: CGSize(width: 60, height: 60))
+           addChild(homebase)
             
+}
             func enemiesMoving(){
                 
             }
