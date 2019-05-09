@@ -30,6 +30,9 @@ import GameplayKit
         run(SKAction.repeatForever(
             SKAction.sequence([SKAction.run(spawnEnemies),SKAction.wait(forDuration: 2.0)]
         )))
+      homeBase()
+      
+        )))
         }
  
     
@@ -53,10 +56,20 @@ import GameplayKit
                  hero3.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
                  hero4.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
                 
-                hero1.zRotation = CGFloat.pi/2
                 addChild(heroes[random])
             }
-            
+            func homeBase(){
+            let homebase = SKSpriteNode(imageNamed: "homeImage")
+            homebase.position = CGPoint(x: 200, y: 620)
+                homebase.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: homebase.size.width, height: homebase.size.height))
+            homebase.scale(to: CGSize(width: 120, height: 120))
+            homebase.physicsBody?.mass = 100
+          //  homebase.physicsBody?.collisionBitMask = PhysicsCategory.enemies
+            homebase.physicsBody?.categoryBitMask = PhysicsCategory.none
+            homebase.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
+            homebase.physicsBody?.isDynamic = true
+           homebase.physicsBody?.affectedByGravity = false
+                addChild(homebase)
            func grass(){
                 var grassIsNice = SKSpriteNode(imageNamed: "grass")
                 grassIsNice.scale(to: CGSize(width: 130 , height: 667))
@@ -121,6 +134,42 @@ import GameplayKit
             }
     
     
+    
+}
+            func enemiesMoving(){
+                
+            }
+    
+            override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+                guard let touch = touches.first else{return}
+                let locationTouch = touch.location(in: self)
+                let fireBall = SKSpriteNode(imageNamed: "fireBall")
+                fireBall.position = player.position
+                fireBall.physicsBody = SKPhysicsBody(rectangleOf: fireBall.size)
+                fireBall.physicsBody?.mass = 1
+                fireBall.physicsBody?.categoryBitMask = PhysicsCategory.fireBall
+                fireBall.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
+                fireBall.physicsBody?.collisionBitMask = PhysicsCategory.none
+                fireBall.physicsBody?.isDynamic = true
+                fireBall.scale(to: CGSize(width: 35, height: 35))
+                fireBall.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
+                addChild(fireBall)
+                let offset = locationTouch - fireBall.position
+                let direction = offset.normalized()
+                let shootAmount = direction * 1000
+                let realDest = shootAmount + fireBall.position
+                let actionMoved = SKAction.move(to: realDest, duration: TimeInterval(2.0))
+                let actionMovedDone = SKAction.removeFromParent()
+                fireBall.run(SKAction.sequence([actionMoved, actionMovedDone]))
+            }
+    
+            func didBegin(_ contact: SKPhysicsContact) {
+                print("Contact")
+                let one = contact.bodyA.node as? SKSpriteNode
+                let two = contact.bodyB.node as? SKSpriteNode
+                one?.removeFromParent()
+                two?.removeFromParent()
+            }
     
    
 

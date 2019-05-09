@@ -13,7 +13,8 @@
         12C8900722722A9F00BFBA33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12C8900522722A9F00BFBA33 /* Main.storyboard */; };
         12C8900922722A9F00BFBA33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12C8900822722A9F00BFBA33 /* Assets.xcassets */; };
         12C8900C22722A9F00BFBA33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12C8900A22722A9F00BFBA33 /* LaunchScreen.storyboard */; };
-        31CC411E2281FCB5008230F3 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CC411D2281FCB5008230F3 /* File.swift */; };
+        31CC411E2281FCB5008230F3 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CC411D2281FCB5008230F3 /* ProgressBar.swift */; };
+        31F890DB22834DF6000EED5A /* VectorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F890DA22834DF6000EED5A /* VectorMath.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +26,8 @@
         12C8900822722A9F00BFBA33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
         12C8900B22722A9F00BFBA33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
         12C8900D22722A9F00BFBA33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-        31CC411D2281FCB5008230F3 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+        31CC411D2281FCB5008230F3 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+        31F890DA22834DF6000EED5A /* VectorMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorMath.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +62,13 @@
             children = (
                 12C88FFB22722A9F00BFBA33 /* AppDelegate.swift */,
                 12C8900122722A9F00BFBA33 /* GameScene.swift */,
-                31CC411D2281FCB5008230F3 /* File.swift */,
+                31CC411D2281FCB5008230F3 /* ProgressBar.swift */,
                 12C8900322722A9F00BFBA33 /* GameViewController.swift */,
                 12C8900522722A9F00BFBA33 /* Main.storyboard */,
                 12C8900822722A9F00BFBA33 /* Assets.xcassets */,
                 12C8900A22722A9F00BFBA33 /* LaunchScreen.storyboard */,
                 12C8900D22722A9F00BFBA33 /* Info.plist */,
+                31F890DA22834DF6000EED5A /* VectorMath.swift */,
             );
             path = "Spawn App";
             sourceTree = "<group>";
@@ -142,8 +145,9 @@
             buildActionMask = 2147483647;
             files = (
                 12C8900222722A9F00BFBA33 /* GameScene.swift in Sources */,
-                31CC411E2281FCB5008230F3 /* File.swift in Sources */,
+                31CC411E2281FCB5008230F3 /* ProgressBar.swift in Sources */,
                 12C8900422722A9F00BFBA33 /* GameViewController.swift in Sources */,
+                31F890DB22834DF6000EED5A /* VectorMath.swift in Sources */,
                 12C88FFC22722A9F00BFBA33 /* AppDelegate.swift in Sources */,
             );
             runOnlyForDeploymentPostprocessing = 0;
