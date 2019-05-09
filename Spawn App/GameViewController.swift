@@ -93,7 +93,7 @@ class GameViewController: UIViewController {
  
     @IBAction func spawButton(_ sender: UIButton) {
         gameScene?.spawnHero()
-   
+        
         
         print("SPAWNED")
     }
