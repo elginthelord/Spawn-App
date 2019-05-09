@@ -26,13 +26,11 @@ import GameplayKit
             
     override func didMove(to view: SKView) {
       backgroundColor = UIColor.white
-     grass()
         run(SKAction.repeatForever(
-            SKAction.sequence([SKAction.run(spawnEnemies),SKAction.wait(forDuration: 2.0)]
-        )))
+            SKAction.sequence([SKAction.run(spawnEnemies),SKAction.wait(forDuration: 2.0)])))
       homeBase()
-      
-        )))
+      grass()
+        
         }
  
     
@@ -127,13 +125,6 @@ import GameplayKit
             func buttonRotation(){
                 
             }
-            
-    func createHealthBar(){ //creates health bar for enemies and home base
-        
-        
-            }
-    
-    
     
 }
             func enemiesMoving(){
