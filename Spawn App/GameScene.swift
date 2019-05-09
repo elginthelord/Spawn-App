@@ -85,7 +85,7 @@ import GameplayKit
             homebase.position = CGPoint(x: 200, y: 620)
                 homebase.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: homebase.size.width, height: homebase.size.height))
             homebase.scale(to: CGSize(width: 120, height: 120))
-            homebase.physicsBody?.mass = 100
+            homebase.physicsBody?.mass = 100000
           //  homebase.physicsBody?.collisionBitMask = PhysicsCategory.enemies
             homebase.physicsBody?.categoryBitMask = PhysicsCategory.none
             homebase.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
