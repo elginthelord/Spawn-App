@@ -32,8 +32,9 @@ import GameplayKit
         )))
       homeBase()
       
-        )))
+        
         }
+
  
     
             func spawnHero(){
@@ -69,7 +70,10 @@ import GameplayKit
             homebase.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
             homebase.physicsBody?.isDynamic = true
            homebase.physicsBody?.affectedByGravity = false
+                homebase.zRotation = CGFloat.pi/2
                 addChild(homebase)
+            }
+            
            func grass(){
                 var grassIsNice = SKSpriteNode(imageNamed: "grass")
                 grassIsNice.scale(to: CGSize(width: 130 , height: 667))
@@ -127,18 +131,11 @@ import GameplayKit
             func buttonRotation(){
                 
             }
-            
-    func createHealthBar(){ //creates health bar for enemies and home base
-        
-        
-            }
+ 
     
     
     
-}
-            func enemiesMoving(){
-                
-            }
+
     
             override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 guard let touch = touches.first else{return}
@@ -153,6 +150,7 @@ import GameplayKit
                 fireBall.physicsBody?.isDynamic = true
                 fireBall.scale(to: CGSize(width: 35, height: 35))
                 fireBall.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
+                
                 addChild(fireBall)
                 let offset = locationTouch - fireBall.position
                 let direction = offset.normalized()
