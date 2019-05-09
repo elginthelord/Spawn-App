@@ -140,7 +140,7 @@ import GameplayKit
     
 
     
-            override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 guard let touch = touches.first else{return}
                 let locationTouch = touch.location(in: self)
                 let fireBall = SKSpriteNode(imageNamed: "fireBall")
@@ -153,7 +153,7 @@ import GameplayKit
                 fireBall.physicsBody?.isDynamic = true
                 fireBall.scale(to: CGSize(width: 35, height: 35))
                 fireBall.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
-                
+    
                 addChild(fireBall)
                 let offset = locationTouch - fireBall.position
                 let direction = offset.normalized()
@@ -177,5 +177,5 @@ import GameplayKit
     
     
     
-}
+
 
