@@ -19,6 +19,11 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        hero1.transform = CGAffineTransform(rotationAngle: CGFloat.pi / -2)
+        hero2.transform = CGAffineTransform(rotationAngle: CGFloat.pi / -2)
+        hero3.transform = CGAffineTransform(rotationAngle: CGFloat.pi / -2)
+        hero4.transform = CGAffineTransform(rotationAngle: CGFloat.pi / -2)
+        
         
        
         
@@ -91,13 +96,31 @@ class GameViewController: UIViewController {
         let node : SKNode = gameScene!.atPoint(location!)
     }*/
  
-    @IBAction func spawButton(_ sender: UIButton) {
-        gameScene?.spawnHero()
-        
-        
+    @IBAction func hero1(_ sender: UIButton) {
+        gameScene?.hero1()
         print("SPAWNED")
     }
     
+    @IBAction func hero2(_ sender: UIButton) {
+        gameScene?.hero2()
+        print("SPAWNED")
+    }
+    
+    @IBAction func hero3(_ sender: UIButton) {
+        gameScene?.hero3()
+        print("SPAWNED")
+    }
+    
+    @IBAction func hero4(_ sender: UIButton) {
+        gameScene?.hero4()
+        print("SPAWNED")
+    }
+    
+    
+    @IBOutlet var hero3: UIButton!
+    @IBOutlet var hero4: UIButton!
+    @IBOutlet var hero1: UIButton!
+    @IBOutlet var hero2: UIButton!
     
     
     
