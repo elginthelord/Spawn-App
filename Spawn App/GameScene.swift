@@ -37,42 +37,65 @@ import GameplayKit
 
  
     
-            func spawnHero(){
+            func hero1(){
                 var hero1 = SKSpriteNode(imageNamed: "hero1")
-                var hero2 = SKSpriteNode(imageNamed: "hero2")
-                var hero3 = SKSpriteNode(imageNamed: "hero3")
-                var hero4 = SKSpriteNode(imageNamed: "hero4")
                 
-                var heroes: [SKSpriteNode] = [hero1, hero2, hero3, hero4]
                 
-                var random = Int.random(in: 0...3)
+                
+               
+                
+               
               
                 hero1.scale(to: CGSize(width: 50, height: 50))
-                hero2.scale(to: CGSize(width: 50, height: 50))
-                hero3.scale(to: CGSize(width: 50, height: 50))
-                hero4.scale(to: CGSize(width: 50, height: 50))
+                
+               
+             
                 
                 hero1.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
-                hero2.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
-                 hero3.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
-                 hero4.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
+               
+                hero1.zRotation = CGFloat.pi / 2
                 
-                addChild(heroes[random])
+                
+                addChild(hero1)
             }
-            func homeBase(){
-            let homebase = SKSpriteNode(imageNamed: "homeImage")
-            homebase.position = CGPoint(x: 200, y: 620)
-                homebase.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: homebase.size.width, height: homebase.size.height))
-            homebase.scale(to: CGSize(width: 120, height: 120))
-            homebase.physicsBody?.mass = 100
-          //  homebase.physicsBody?.collisionBitMask = PhysicsCategory.enemies
-            homebase.physicsBody?.categoryBitMask = PhysicsCategory.none
-            homebase.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
-            homebase.physicsBody?.isDynamic = true
-           homebase.physicsBody?.affectedByGravity = false
-                homebase.zRotation = CGFloat.pi/2
-                addChild(homebase)
+            
+            func hero2(){
+                var hero2 = SKSpriteNode(imageNamed: "hero2")
+                
+                 hero2.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
+                
+                hero2.scale(to: CGSize(width: 50, height: 50))
+                
+                  hero2.zRotation = CGFloat.pi / 2
+                
+                addChild(hero2)
             }
+            
+            func hero3(){
+                var hero3 = SKSpriteNode(imageNamed: "hero3")
+                
+                hero3.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
+                
+                 hero3.scale(to: CGSize(width: 50, height: 50))
+                
+                  hero3.zRotation = CGFloat.pi / 2
+                
+                addChild(hero3)
+            }
+            
+            func hero4(){
+                var hero4 = SKSpriteNode(imageNamed: "hero4")
+                
+                hero4.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
+                   hero4.scale(to: CGSize(width: 50, height: 50))
+                
+                  hero4.zRotation = CGFloat.pi / 2
+                
+                addChild(hero4)
+            }
+            
+            
+            
             
            func grass(){
                 var grassIsNice = SKSpriteNode(imageNamed: "grass")
@@ -128,9 +151,21 @@ import GameplayKit
                 
             }
             
-            func buttonRotation(){
-                
+            func homeBase(){
+                let homebase = SKSpriteNode(imageNamed: "homeImage")
+                homebase.position = CGPoint(x: 200, y: 620)
+                homebase.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: homebase.size.width, height: homebase.size.height))
+                homebase.scale(to: CGSize(width: 120, height: 120))
+                homebase.physicsBody?.mass = 100
+                //  homebase.physicsBody?.collisionBitMask = PhysicsCategory.enemies
+                homebase.physicsBody?.categoryBitMask = PhysicsCategory.none
+                homebase.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
+                homebase.physicsBody?.isDynamic = true
+                homebase.physicsBody?.affectedByGravity = false
+                homebase.zRotation = CGFloat.pi/2
+                addChild(homebase)
             }
+            
  
     
     
