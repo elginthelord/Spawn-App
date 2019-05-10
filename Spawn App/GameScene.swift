@@ -26,12 +26,10 @@ import GameplayKit
             
     override func didMove(to view: SKView) {
       backgroundColor = UIColor.white
-     grass()
         run(SKAction.repeatForever(
-            SKAction.sequence([SKAction.run(spawnEnemies),SKAction.wait(forDuration: 2.0)]
-        )))
+            SKAction.sequence([SKAction.run(spawnEnemies),SKAction.wait(forDuration: 2.0)])))
       homeBase()
-      
+      grass()
         
         }
 
@@ -172,7 +170,7 @@ import GameplayKit
     
 
     
-            override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 guard let touch = touches.first else{return}
                 let locationTouch = touch.location(in: self)
                 let fireBall = SKSpriteNode(imageNamed: "fireBall")
@@ -209,5 +207,5 @@ import GameplayKit
     
     
     
-}
+
 
