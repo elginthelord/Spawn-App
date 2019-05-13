@@ -124,6 +124,16 @@ import GameplayKit
                 enemy1.physicsBody? = SKPhysicsBody(rectangleOf: enemy1.size)
                 enemy2.physicsBody? = SKPhysicsBody(rectangleOf: enemy2.size)
                 
+                enemy1.physicsBody?.categoryBitMask = PhysicsCategory.enemies
+                enemy2.physicsBody?.categoryBitMask = PhysicsCategory.enemies
+                
+                enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
+                enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
+                
+                enemy1.physicsBody?.collisionBitMask = PhysicsCategory.none
+                enemy2.physicsBody?.collisionBitMask = PhysicsCategory.none
+                
+                
                 enemy2.physicsBody?.affectedByGravity = false
                 enemy1.physicsBody?.affectedByGravity = false
                 
@@ -154,8 +164,8 @@ import GameplayKit
                 homebase.position = CGPoint(x: 200, y: 620)
                 homebase.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: homebase.size.width, height: homebase.size.height))
                 homebase.scale(to: CGSize(width: 120, height: 120))
-                homebase.physicsBody?.mass = 100
-                //  homebase.physicsBody?.collisionBitMask = PhysicsCategory.enemies
+                homebase.physicsBody?.mass = 100000
+                homebase.physicsBody?.collisionBitMask = PhysicsCategory.enemies
                 homebase.physicsBody?.categoryBitMask = PhysicsCategory.none
                 homebase.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
                 homebase.physicsBody?.isDynamic = true
@@ -170,7 +180,7 @@ import GameplayKit
     
 
     
-func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+            override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 guard let touch = touches.first else{return}
                 let locationTouch = touch.location(in: self)
                 let fireBall = SKSpriteNode(imageNamed: "fireBall")
@@ -209,3 +219,4 @@ func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     
 
 
+}
