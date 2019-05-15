@@ -10,26 +10,31 @@ import SpriteKit
 import GameplayKit
 
 
-    struct PhysicsCategory{
+    struct PhysicsCategory {
         static let none: UInt32 = 0
         static let all: UInt32 = UInt32.max
+        static let player: UInt32 = 1
         static let enemies: UInt32 = 2 // #1
         static let fireBall: UInt32 = 4 // #2
-        static let player: UInt32 = 1
+     
 }
         class GameScene: SKScene, SKPhysicsContactDelegate {
    
     var player = SKSpriteNode(imageNamed: "hero1")
     
+            var enemy1Health = [String:Int]()
+            var enemy2Health = [String:Int]()
             
             
             
     override func didMove(to view: SKView) {
+        physicsWorld.contactDelegate = self
       backgroundColor = UIColor.white
         run(SKAction.repeatForever(
             SKAction.sequence([SKAction.run(spawnEnemies),SKAction.wait(forDuration: 2.0)])))
+      
       homeBase()
-      grass()
+   //   grass()
         
         }
 
@@ -39,7 +44,7 @@ import GameplayKit
                 var hero1 = SKSpriteNode(imageNamed: "hero1")
                 
                 
-                
+              
                
                 
                
@@ -53,12 +58,23 @@ import GameplayKit
                
                 hero1.zRotation = CGFloat.pi / 2
                 
+                hero1.physicsBody?.categoryBitMask = PhysicsCategory.player
+                hero1.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
+                hero1.physicsBody?.collisionBitMask = PhysicsCategory.none
                 
+               var actionMove = SKAction.move(to: CGPoint(x:   hero1.position.x, y:  (hero1.position.y * -1)), duration: TimeInterval(CGFloat.random(in: 5...10)))
+                let actionMoveDone = SKAction.removeFromParent()
+                let wait10 = SKAction.wait(forDuration: 10)
+                let wait5 = SKAction.wait(forDuration: 5)
+               hero1.run(SKAction.sequence([actionMove, actionMoveDone]))
                 addChild(hero1)
+                
             }
             
             func hero2(){
                 var hero2 = SKSpriteNode(imageNamed: "hero2")
+                
+         
                 
                  hero2.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
                 
@@ -66,11 +82,19 @@ import GameplayKit
                 
                   hero2.zRotation = CGFloat.pi / 2
                 
+                hero2.physicsBody?.categoryBitMask = PhysicsCategory.player
+                hero2.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
+                hero2.physicsBody?.collisionBitMask = PhysicsCategory.none
+                
                 addChild(hero2)
             }
             
             func hero3(){
                 var hero3 = SKSpriteNode(imageNamed: "hero3")
+                
+             //   var xrandom = CGFloat.random(in: 0.60...0.80)
+                
+               // var xaxis = CGFloat(self.size.width * xrandom)
                 
                 hero3.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
                 
@@ -78,30 +102,36 @@ import GameplayKit
                 
                   hero3.zRotation = CGFloat.pi / 2
                 
+                hero3.physicsBody?.categoryBitMask = PhysicsCategory.player
+                hero3.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
+                hero3.physicsBody?.collisionBitMask = PhysicsCategory.none
+                
                 addChild(hero3)
             }
             
-            func hero4(){
+         /*   func hero4(){
                 var hero4 = SKSpriteNode(imageNamed: "hero4")
                 
-                hero4.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
+           //     var xrandom = CGFloat.random(in: 0.60...0.80)
+                
+           //     var xaxis = CGFloat(self.size.width * xrandom)
+                
+                hero4.position = CGPoint(x: (self.size.width * 0.50), y: (self.size.height * 0.90))
                    hero4.scale(to: CGSize(width: 50, height: 50))
                 
                   hero4.zRotation = CGFloat.pi / 2
                 
+                hero4.physicsBody?.categoryBitMask = PhysicsCategory.player
+                hero4.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
+                hero4.physicsBody?.collisionBitMask = PhysicsCategory.none
+                
                 addChild(hero4)
             }
+            */
             
             
             
-            
-           func grass(){
-                var grassIsNice = SKSpriteNode(imageNamed: "grass")
-                grassIsNice.scale(to: CGSize(width: 130 , height: 667))
-                grassIsNice.position = CGPoint(x: self.size.width * 0.826, y: 333.5)
-                addChild(grassIsNice)
-                
-            }
+          
             func spawnEnemies() {
                 
                 var enemy1 = SKSpriteNode(imageNamed: "enemyImage")
@@ -109,20 +139,33 @@ import GameplayKit
                 var random = Int.random(in: 0...1)
                 
                 var enemies: [SKSpriteNode] = [enemy1, enemy2]
-                var xrandom = CGFloat.random(in: 0.60...0.80)
                 
-                var xaxis = CGFloat(self.size.width * xrandom)
+            /*    var xrandom = CGFloat.random(in: 0.60...0.62)
+                
+               var xaxis = CGFloat(self.size.width * xrandom)
+                */
                 
                 
                 
-                enemy1.position = CGPoint(x: xaxis , y: (self.size.height * 0.10))
-                enemy2.position = CGPoint(x: xaxis , y: (self.size.height * 0.10))
+                
+                
+                
+                enemy1.position = CGPoint(x: (self.size.width * 0.60) , y: (self.size.height * 0.10))
+                enemy2.position = CGPoint(x: (self.size.width * 0.60) , y: (self.size.height * 0.10))
                 
                 enemy1.scale(to: CGSize(width: 50, height: 50))
                 enemy2.scale(to: CGSize(width: 50, height: 50))
                 
                 enemy1.physicsBody? = SKPhysicsBody(rectangleOf: enemy1.size)
                 enemy2.physicsBody? = SKPhysicsBody(rectangleOf: enemy2.size)
+                
+                enemy1.physicsBody?.categoryBitMask = PhysicsCategory.enemies
+                enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.player
+                enemy1.physicsBody?.collisionBitMask = PhysicsCategory.none
+                
+                enemy2.physicsBody?.categoryBitMask = PhysicsCategory.enemies
+                enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.player
+                enemy2.physicsBody?.collisionBitMask = PhysicsCategory.none
                 
                 enemy2.physicsBody?.affectedByGravity = false
                 enemy1.physicsBody?.affectedByGravity = false
@@ -136,10 +179,12 @@ import GameplayKit
                 enemy1.physicsBody?.isDynamic = true
                 enemy2.physicsBody?.isDynamic = true
                 
+                
+                
                 addChild(enemies[random])
                 
-                var actionMove = SKAction.move(to: CGPoint(x:  xaxis, y:  (self.size.height)), duration: TimeInterval(CGFloat.random(in: 5.0...10.0)))
-                var actionMove2 = SKAction.move(to: CGPoint(x:  xaxis, y: (self.size.height)), duration: TimeInterval(CGFloat.random(in: 5.0...10.0)))
+                var actionMove = SKAction.move(to: CGPoint(x:  (self.size.width * 0.60), y:  (self.size.height)), duration: TimeInterval(CGFloat.random(in: 5...10)))
+                var actionMove2 = SKAction.move(to: CGPoint(x:  (self.size.width * 0.60), y: (self.size.height)), duration: TimeInterval(CGFloat.random(in: 5...10)))
                 let actionMoveDone = SKAction.removeFromParent()
                 
                 enemy1.run(SKAction.sequence([actionMove, actionMoveDone]))
@@ -158,10 +203,24 @@ import GameplayKit
                 //  homebase.physicsBody?.collisionBitMask = PhysicsCategory.enemies
                 homebase.physicsBody?.categoryBitMask = PhysicsCategory.none
                 homebase.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
+                homebase.physicsBody?.collisionBitMask = PhysicsCategory.none
                 homebase.physicsBody?.isDynamic = true
                 homebase.physicsBody?.affectedByGravity = false
                 homebase.zRotation = CGFloat.pi/2
                 addChild(homebase)
+            }
+            
+            func grass(){
+                var grassIsNice = SKSpriteNode(imageNamed: "grass")
+                grassIsNice.scale(to: CGSize(width: 130 , height: 667))
+                grassIsNice.position = CGPoint(x: self.size.width * 0.826, y: 333.5)
+                grassIsNice.physicsBody?.categoryBitMask = PhysicsCategory.none
+                grassIsNice.physicsBody?.contactTestBitMask = PhysicsCategory.none
+                grassIsNice.physicsBody?.collisionBitMask = PhysicsCategory.none
+                
+                addChild(grassIsNice)
+                
+                
             }
             
  
@@ -170,7 +229,7 @@ import GameplayKit
     
 
     
-func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+            override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 guard let touch = touches.first else{return}
                 let locationTouch = touch.location(in: self)
                 let fireBall = SKSpriteNode(imageNamed: "fireBall")
@@ -200,6 +259,10 @@ func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 let two = contact.bodyB.node as? SKSpriteNode
                 one?.removeFromParent()
                 two?.removeFromParent()
+                
+              
+                
+                
             }
     
    
@@ -209,3 +272,4 @@ func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     
 
 
+}
