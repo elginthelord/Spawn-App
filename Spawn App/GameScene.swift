@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-//
+
     struct PhysicsCategory{
         static let none: UInt32 = 0
         static let all: UInt32 = UInt32.max
@@ -30,7 +30,7 @@ import GameplayKit
             SKAction.sequence([SKAction.run(spawnEnemies),SKAction.wait(forDuration: 2.0)])))
       homeBase()
       grass()
-        
+    
         }
 
  
@@ -124,15 +124,6 @@ import GameplayKit
                 enemy1.physicsBody? = SKPhysicsBody(rectangleOf: enemy1.size)
                 enemy2.physicsBody? = SKPhysicsBody(rectangleOf: enemy2.size)
                 
-                enemy1.physicsBody?.categoryBitMask = PhysicsCategory.enemies
-                enemy2.physicsBody?.categoryBitMask = PhysicsCategory.enemies
-                
-                enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
-                enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
-                
-                enemy1.physicsBody?.collisionBitMask = PhysicsCategory.none
-                enemy2.physicsBody?.collisionBitMask = PhysicsCategory.none
-                
                 
                 enemy2.physicsBody?.affectedByGravity = false
                 enemy1.physicsBody?.affectedByGravity = false
@@ -142,6 +133,15 @@ import GameplayKit
                 
                 enemy1.physicsBody?.mass = 1
                 enemy2.physicsBody?.mass = 1
+               
+                enemy1.physicsBody?.categoryBitMask = PhysicsCategory.enemies
+                enemy2.physicsBody?.categoryBitMask = PhysicsCategory.enemies
+                
+                enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
+                enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
+                
+                enemy1.physicsBody?.collisionBitMask = PhysicsCategory.none
+                enemy2.physicsBody?.collisionBitMask = PhysicsCategory.none
                 
                 enemy1.physicsBody?.isDynamic = true
                 enemy2.physicsBody?.isDynamic = true
