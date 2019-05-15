@@ -161,11 +161,17 @@ import GameplayKit
                 
                 enemy1.physicsBody?.categoryBitMask = PhysicsCategory.enemies
                 enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.player
+                enemy2.physicsBody?.categoryBitMask = PhysicsCategory.enemies
+                
+                enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
+                enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
+                
                 enemy1.physicsBody?.collisionBitMask = PhysicsCategory.none
                 
                 enemy2.physicsBody?.categoryBitMask = PhysicsCategory.enemies
                 enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.player
                 enemy2.physicsBody?.collisionBitMask = PhysicsCategory.none
+                
                 
                 enemy2.physicsBody?.affectedByGravity = false
                 enemy1.physicsBody?.affectedByGravity = false
@@ -199,8 +205,8 @@ import GameplayKit
                 homebase.position = CGPoint(x: 200, y: 620)
                 homebase.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: homebase.size.width, height: homebase.size.height))
                 homebase.scale(to: CGSize(width: 120, height: 120))
-                homebase.physicsBody?.mass = 100
-                //  homebase.physicsBody?.collisionBitMask = PhysicsCategory.enemies
+                homebase.physicsBody?.mass = 100000
+                homebase.physicsBody?.collisionBitMask = PhysicsCategory.enemies
                 homebase.physicsBody?.categoryBitMask = PhysicsCategory.none
                 homebase.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
                 homebase.physicsBody?.collisionBitMask = PhysicsCategory.none

@@ -1,10 +1,4 @@
-//
-//  File.swift
-//  Spawn App
-//
-//  Created by DANIEL HAMILL on 5/7/19.
-//  Copyright © 2019 CLC. All rights reserved.
-//
+
 import SpriteKit
 import Foundation
 class IMProgressBar : SKNode{
@@ -12,6 +6,7 @@ class IMProgressBar : SKNode{
     var emptySprite : SKSpriteNode? = nil
     var progressBar : SKCropNode
     init(emptyImageName: String!,filledImageName : String)
+    
     {
         progressBar = SKCropNode()
         super.init()
@@ -28,6 +23,8 @@ class IMProgressBar : SKNode{
             emptySprite = SKSpriteNode.init(imageNamed: emptyImageName)
             self.addChild(emptySprite!)
         }
+    
+    
     }
     func setXProgress(xProgress : CGFloat){
         var value = xProgress
