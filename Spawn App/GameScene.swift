@@ -1,16 +1,10 @@
-//
-//  GameScene.swift
-//  Spawn App
-//
-//  Created by LORD ELGIN RAGUERO on 4/25/19.
-//  Copyright © 2019 CLC. All rights reserved.
-//
+
 
 import SpriteKit
 import GameplayKit
 
 
-    struct PhysicsCategory {
+    struct PhysicsCategory{
         static let none: UInt32 = 0
         static let all: UInt32 = UInt32.max
         static let player: UInt32 = 1
@@ -31,13 +25,14 @@ import GameplayKit
         physicsWorld.contactDelegate = self
         
       backgroundColor = UIColor.white
-        
+        homeBase()
+        grass()
+        spawnEnemies()
         run(SKAction.repeatForever(
             SKAction.sequence([SKAction.run(spawnEnemies),SKAction.wait(forDuration: 2.0)])))
       
-      homeBase()
-   //   grass()
-        
+      
+    
         }
 
  
@@ -169,6 +164,9 @@ import GameplayKit
                 
                 
                 enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
+                enemy2.physicsBody?.categoryBitMask = PhysicsCategory.enemies
+                
+                enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
                 
                 
                 enemy2.physicsBody?.categoryBitMask = PhysicsCategory.enemies
@@ -188,7 +186,8 @@ import GameplayKit
                 
                 enemy1.physicsBody?.mass = 1
                 enemy2.physicsBody?.mass = 1
-                
+               
+            
                 enemy1.physicsBody?.isDynamic = true
                 enemy2.physicsBody?.isDynamic = true
                 
@@ -243,8 +242,11 @@ import GameplayKit
 
     
             override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+                
                 guard let touch = touches.first else{return}
+               
                 let locationTouch = touch.location(in: self)
+                
                 let fireBall = SKSpriteNode(imageNamed: "fireBall")
                 fireBall.position = player.position
                 fireBall.physicsBody = SKPhysicsBody(rectangleOf: fireBall.size)
@@ -255,12 +257,13 @@ import GameplayKit
                 fireBall.physicsBody?.isDynamic = true
                 fireBall.scale(to: CGSize(width: 35, height: 35))
                 fireBall.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
-                
                 addChild(fireBall)
+                
                 let offset = locationTouch - fireBall.position
                 let direction = offset.normalized()
                 let shootAmount = direction * 1000
                 let realDest = shootAmount + fireBall.position
+                
                 let actionMoved = SKAction.move(to: realDest, duration: TimeInterval(2.0))
                 let actionMovedDone = SKAction.removeFromParent()
                 fireBall.run(SKAction.sequence([actionMoved, actionMovedDone]))
