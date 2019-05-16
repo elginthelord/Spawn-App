@@ -15,7 +15,7 @@ class GameViewController: UIViewController {
     
     @IBOutlet var currency: UILabel!
     
-    var money: Int = 100
+    var money: Int = 200
     var gameScene:GameScene?
     
     override func viewDidLoad() {
@@ -26,7 +26,7 @@ class GameViewController: UIViewController {
         hero3.transform = CGAffineTransform(rotationAngle: CGFloat.pi / -2)
         currency.transform = CGAffineTransform(rotationAngle: CGFloat.pi / -2)
         
-        currency.text = "\(money + 100)"
+       
         
         
         
@@ -106,44 +106,101 @@ class GameViewController: UIViewController {
     
  
     @IBAction func hero1(_ sender: UIButton) {
-        gameScene?.hero1()
-        sender.isUserInteractionEnabled = false
-        Timer.scheduledTimer(withTimeInterval: 4, repeats: false, block: {_ in sender.isUserInteractionEnabled = true})
-        money = Int(currency.text!)!
-         if (money - 50) > 0{
-        currency.text = "\(money - 50)"
-         }
-        youCantBuy()
         
+        
+        
+        money = Int(currency.text!)!
+        
+        if (money - 50) >  0 {
+            sender.isUserInteractionEnabled = false
+            Timer.scheduledTimer(withTimeInterval: 4, repeats: false, block: {_ in sender.isUserInteractionEnabled = true})
+            currency.text = "\(money - 50)"
+            gameScene?.hero1()
+            
+            
+        } else if (money - 50) < 0 {
+            sender.isUserInteractionEnabled = false
+            currency.text = "\(money)"
+            
+            
+            
+            
+        }
+        
+       
+        
+        
+        
+        
+        youCantBuy50()
         print("SPAWNED")
     }
     
     @IBAction func hero2(_ sender: UIButton) {
-        gameScene?.hero2()
-        sender.isUserInteractionEnabled = false
-        Timer.scheduledTimer(withTimeInterval: 7, repeats: false, block: {_ in sender.isUserInteractionEnabled = true})
+       
+        
         money = Int(currency.text!)!
-         if Int(currency.text!)! > 0{
-        currency.text = "\(money - 75)"
+        
+        if (money - 75) >  0 {
+            sender.isUserInteractionEnabled = false
+            Timer.scheduledTimer(withTimeInterval: 4, repeats: false, block: {_ in sender.isUserInteractionEnabled = true})
+            currency.text = "\(money - 75)"
+            gameScene?.hero2()
+            
+            
+        } else if (money - 75) < 0 {
+            sender.isUserInteractionEnabled = false
+            currency.text = "\(money)"
+            
+            
+            
+            
+            
         }
-        youCantBuy()
+        
+        youCantBuy75()
         print("SPAWNED")
     }
     
     @IBAction func hero3(_ sender: UIButton) {
-        gameScene?.hero3()
-        sender.isUserInteractionEnabled = false
-        Timer.scheduledTimer(withTimeInterval: 12, repeats: false, block: {_ in sender.isUserInteractionEnabled = true})
+        
+        
         money = Int(currency.text!)!
-        if Int(currency.text!)! > 0{
-        currency.text = "\(money - 100)"
+        
+        if (money - 100) >  0 {
+            sender.isUserInteractionEnabled = false
+            Timer.scheduledTimer(withTimeInterval: 4, repeats: false, block: {_ in sender.isUserInteractionEnabled = true})
+            currency.text = "\(money - 100)"
+            gameScene?.hero3()
+            
+            
+        } else if (money - 100) < 0 {
+            sender.isUserInteractionEnabled = false
+            currency.text = "\(money)"
+            
+            
+            
+            
         }
-        youCantBuy()
+        youCantBuy100()
         print("SPAWNED")
     }
     
-    func youCantBuy(){
-        if Int(currency.text!)! < 0{
+    func youCantBuy50(){
+        if (money - 50) < 0{
+            let alert = UIAlertController(title: "You don't have any money!", message: nil, preferredStyle: .alert)
+            
+            let okay = UIAlertAction(title: "OKAY", style: .cancel)
+            
+            alert.addAction(okay)
+            
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func youCantBuy75(){
+        if (money - 75) < 0{
             let alert = UIAlertController(title: "You don't have any money!", message: nil, preferredStyle: .alert)
             
             let okay = UIAlertAction(title: "OKAY", style: .cancel)
@@ -154,7 +211,25 @@ class GameViewController: UIViewController {
             
             self.present(alert, animated: true, completion: nil)
         }
+    
+    
     }
+
+    func youCantBuy100(){
+    if (money - 100) < 0{
+        let alert = UIAlertController(title: "You don't have any money!", message: nil, preferredStyle: .alert)
+        
+        let okay = UIAlertAction(title: "OKAY", style: .cancel)
+        
+        alert.addAction(okay)
+        
+        
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+    
+
 
     
     

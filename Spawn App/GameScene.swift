@@ -29,7 +29,9 @@ import GameplayKit
             
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
+        
       backgroundColor = UIColor.white
+        
         run(SKAction.repeatForever(
             SKAction.sequence([SKAction.run(spawnEnemies),SKAction.wait(forDuration: 2.0)])))
       
@@ -147,7 +149,8 @@ import GameplayKit
                 
                 
                 
-                
+                enemy1.physicsBody = SKPhysicsBody(rectangleOf: enemy1.size)
+                enemy2.physicsBody = SKPhysicsBody(rectangleOf: enemy2.size)
                 
                 
                 enemy1.position = CGPoint(x: (self.size.width * 0.60) , y: (self.size.height * 0.10))
@@ -159,18 +162,22 @@ import GameplayKit
                 enemy1.physicsBody? = SKPhysicsBody(rectangleOf: enemy1.size)
                 enemy2.physicsBody? = SKPhysicsBody(rectangleOf: enemy2.size)
                 
+                
                 enemy1.physicsBody?.categoryBitMask = PhysicsCategory.enemies
                 enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.player
-                enemy2.physicsBody?.categoryBitMask = PhysicsCategory.enemies
+                enemy1.physicsBody?.categoryBitMask = PhysicsCategory.none
+                
                 
                 enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
-                enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
                 
-                enemy1.physicsBody?.collisionBitMask = PhysicsCategory.none
                 
                 enemy2.physicsBody?.categoryBitMask = PhysicsCategory.enemies
                 enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.player
                 enemy2.physicsBody?.collisionBitMask = PhysicsCategory.none
+                
+                
+                enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
+                
                 
                 
                 enemy2.physicsBody?.affectedByGravity = false
@@ -244,7 +251,7 @@ import GameplayKit
                 fireBall.physicsBody?.mass = 1
                 fireBall.physicsBody?.categoryBitMask = PhysicsCategory.fireBall
                 fireBall.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
-                fireBall.physicsBody?.collisionBitMask = PhysicsCategory.none
+           //     fireBall.physicsBody?.collisionBitMask = PhysicsCategory.none
                 fireBall.physicsBody?.isDynamic = true
                 fireBall.scale(to: CGSize(width: 35, height: 35))
                 fireBall.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
@@ -259,13 +266,22 @@ import GameplayKit
                 fireBall.run(SKAction.sequence([actionMoved, actionMovedDone]))
             }
     
+            
+            func fireBallDidCollideWithEnemies(fireball: SKSpriteNode, enemies: SKSpriteNode){
+                fireball.removeFromParent()
+                enemies.removeFromParent()
+            }
+            
+            
+            
             func didBegin(_ contact: SKPhysicsContact) {
                 print("Contact")
-                let one = contact.bodyA.node as? SKSpriteNode
-                let two = contact.bodyB.node as? SKSpriteNode
-                one?.removeFromParent()
-                two?.removeFromParent()
-                
+                let one = contact.bodyA
+                let two = contact.bodyB
+               
+                if let fireball = one.node as? SKSpriteNode, let enemies = two.node as? SKSpriteNode {
+                    fireBallDidCollideWithEnemies(fireball: fireball, enemies: enemies)
+                }
               
                 
                 
