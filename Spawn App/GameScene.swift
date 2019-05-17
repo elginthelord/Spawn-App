@@ -82,7 +82,11 @@ import GameplayKit
                 hero2.physicsBody?.categoryBitMask = PhysicsCategory.player
                 hero2.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
                 hero2.physicsBody?.collisionBitMask = PhysicsCategory.none
-                
+                var actionMove = SKAction.move(to: CGPoint(x:  hero2.position.x, y:  (hero2.position.y * -1)), duration: TimeInterval(CGFloat.random(in: 5...10)))
+                let actionMoveDone = SKAction.removeFromParent()
+                let wait10 = SKAction.wait(forDuration: 10)
+                let wait5 = SKAction.wait(forDuration: 5)
+                hero2.run(SKAction.sequence([actionMove, actionMoveDone]))
                 addChild(hero2)
             }
             
@@ -102,7 +106,12 @@ import GameplayKit
                 hero3.physicsBody?.categoryBitMask = PhysicsCategory.player
                 hero3.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
                 hero3.physicsBody?.collisionBitMask = PhysicsCategory.none
-                
+                var actionMove = SKAction.move(to: CGPoint(x:   hero3.position.x, y:  (hero3.position.y * -1)), duration: TimeInterval(CGFloat.random(in: 5...10)))
+                let actionMoveDone = SKAction.removeFromParent()
+                let wait10 = SKAction.wait(forDuration: 10)
+                let wait5 = SKAction.wait(forDuration: 5)
+                hero3.run(SKAction.sequence([actionMove, actionMoveDone]))
+
                 addChild(hero3)
             }
             
