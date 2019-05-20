@@ -59,7 +59,7 @@ import GameplayKit
             override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 for touch in touches {
                     let location = touch.location(in: self)
-                    
+                    money = Int(currency.text!)!
                     if (hero1Button?.contains(location))!{
                         hero1()
                         
