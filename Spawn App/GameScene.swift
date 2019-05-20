@@ -13,30 +13,74 @@ import GameplayKit
      
 }
         class GameScene: SKScene, SKPhysicsContactDelegate {
-   
+    var currency: SKLabelNode!
     var player = SKSpriteNode(imageNamed: "hero1")
     
-            var enemy1Health = [String:Int]()
-            var enemy2Health = [String:Int]()
+            var hero1Button: SKSpriteNode?
             
-            
+            var money: Int = 200
             
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
+        hero1Buttonz()
         
       backgroundColor = UIColor.white
         homeBase()
-        grass()
+        
+       // grass()
+        
         spawnEnemies()
+        
+        yourMoney()
+        
         run(SKAction.repeatForever(
             SKAction.sequence([SKAction.run(spawnEnemies),SKAction.wait(forDuration: 2.0)])))
+        
       
       
     
         }
 
- 
+            
+            func yourMoney(){
+               
+               currency = SKLabelNode(fontNamed: "Times New Roman")
+                currency.horizontalAlignmentMode = .right
+                currency.verticalAlignmentMode = .center
+                currency.zRotation = CGFloat.pi/2
+                currency.text = "\(money)"
+                currency.position = CGPoint(x: (self.size.width * 0.50), y: (self.size.height * 0.10))
+                currency.fontColor = UIColor.black
+                addChild(currency)
+                
+                
+            }
+            
+            override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+                for touch in touches {
+                    let location = touch.location(in: self)
+                    
+                    if (hero1Button?.contains(location))!{
+                        hero1()
+                        
+                        currency.text = "\(money - 50)"
+                        
+                    }
+                }
+            }
     
+            
+            func hero1Buttonz(){
+                hero1Button = SKSpriteNode(imageNamed: "hero1")
+                hero1Button?.size = CGSize(width: 45, height: 45)
+                hero1Button?.position = CGPoint(x: (self.size.width * 0.10), y: (self.size.height * 0.70))
+                hero1Button?.zRotation = CGFloat.pi / 2
+                
+                
+                addChild(hero1Button!)
+            }
+            
+            
             func hero1(){
                 var hero1 = SKSpriteNode(imageNamed: "hero1")
                 
@@ -106,6 +150,8 @@ import GameplayKit
                 addChild(hero3)
             }
             
+            
+            
          /*   func hero4(){
                 var hero4 = SKSpriteNode(imageNamed: "hero4")
                 
@@ -161,20 +207,16 @@ import GameplayKit
                 enemy1.physicsBody?.categoryBitMask = PhysicsCategory.enemies
                 enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.player
                 enemy1.physicsBody?.categoryBitMask = PhysicsCategory.none
-                
-                
                 enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
-                enemy2.physicsBody?.categoryBitMask = PhysicsCategory.enemies
+                
                 
                 enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
-                
-                
                 enemy2.physicsBody?.categoryBitMask = PhysicsCategory.enemies
                 enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.player
                 enemy2.physicsBody?.collisionBitMask = PhysicsCategory.none
                 
                 
-                enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
+                
                 
                 
                 
@@ -198,6 +240,8 @@ import GameplayKit
                 var actionMove = SKAction.move(to: CGPoint(x:  (self.size.width * 0.60), y:  (self.size.height)), duration: TimeInterval(CGFloat.random(in: 5...10)))
                 var actionMove2 = SKAction.move(to: CGPoint(x:  (self.size.width * 0.60), y: (self.size.height)), duration: TimeInterval(CGFloat.random(in: 5...10)))
                 let actionMoveDone = SKAction.removeFromParent()
+                
+                
                 
                 enemy1.run(SKAction.sequence([actionMove, actionMoveDone]))
                 enemy2.run(SKAction.sequence([actionMove2, actionMoveDone]))
@@ -270,9 +314,10 @@ import GameplayKit
             }
     
             
-            func fireBallDidCollideWithEnemies(fireball: SKSpriteNode, enemies: SKSpriteNode){
+            func fireBallDidCollideWithEnemies(fireball: SKSpriteNode, enemies: SKSpriteNode, player: SKSpriteNode){
                 fireball.removeFromParent()
                 enemies.removeFromParent()
+                player.removeFromParent()
             }
             
             
@@ -282,18 +327,67 @@ import GameplayKit
                 let one = contact.bodyA
                 let two = contact.bodyB
                
+                
+                
                 if let fireball = one.node as? SKSpriteNode, let enemies = two.node as? SKSpriteNode {
-                    fireBallDidCollideWithEnemies(fireball: fireball, enemies: enemies)
+                    fireBallDidCollideWithEnemies(fireball: fireball, enemies: enemies, player: player)
+                    
+                    
+                    
+                    
                 }
               
                 
                 
             }
     
-   
+   /*
+            func youCantBuy50(){
+                if (money - 50) < 0{
+                    let alert = UIAlertController(title: "You don't have any money!", message: nil, preferredStyle: .alert)
+                    
+                    let okay = UIAlertAction(title: "OKAY", style: .cancel)
+                    
+                    alert.addAction(okay)
+                    
+                    
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+            
+            func youCantBuy75(){
+                if (money - 75) < 0{
+                    let alert = UIAlertController(title: "You don't have any money!", message: nil, preferredStyle: .alert)
+                    
+                    let okay = UIAlertAction(title: "OKAY", style: .cancel)
+                    
+                    alert.addAction(okay)
+                    
+                    
+                    
+                    self.present(alert, animated: true, completion: nil)
+                }
+                
+                
+            }
+            
+            func youCantBuy100(){
+                if (money - 100) < 0{
+                    let alert = UIAlertController(title: "You don't have any money!", message: nil, preferredStyle: .alert)
+                    
+                    let okay = UIAlertAction(title: "OKAY", style: .cancel)
+                    
+                    alert.addAction(okay)
+                    
+                    
+                    
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+            
 
     
-    
+    */
     
 
 

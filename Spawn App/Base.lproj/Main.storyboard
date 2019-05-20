@@ -18,24 +18,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJS-Qh-lWH">
-                                <rect key="frame" x="41" y="252" width="40" height="56"/>
+                            <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJS-Qh-lWH">
+                                <rect key="frame" x="16" y="314" width="40" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="hero2"/>
                                 <connections>
                                     <action selector="hero2:" destination="BV1-FR-VrT" eventType="touchUpInside" id="30u-mg-Bwo"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xFV-Oq-d7Z">
-                                <rect key="frame" x="41" y="148" width="40" height="56"/>
+                            <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xFV-Oq-d7Z">
+                                <rect key="frame" x="16" y="132" width="40" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="hero1"/>
                                 <connections>
                                     <action selector="hero1:" destination="BV1-FR-VrT" eventType="touchUpInside" id="rVB-gW-aM6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0j-ac-2ee">
-                                <rect key="frame" x="41" y="346" width="40" height="56"/>
+                            <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0j-ac-2ee">
+                                <rect key="frame" x="16" y="496" width="40" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="hero3">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -45,8 +45,8 @@
                                     <action selector="hero3:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Fp3-bP-LmP"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzq-3f-gme">
-                                <rect key="frame" x="39" y="61" width="61" height="37"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzq-3f-gme">
+                                <rect key="frame" x="157" y="610" width="61" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -54,10 +54,17 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="NJS-Qh-lWH"/>
+                                <exclude reference="xFV-Oq-d7Z"/>
+                                <exclude reference="q0j-ac-2ee"/>
+                                <exclude reference="dzq-3f-gme"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="5Ka-6D-MDS"/>
                     <connections>
-                        <outlet property="currency" destination="dzq-3f-gme" id="kiK-S6-P1q"/>
                         <outlet property="hero1" destination="xFV-Oq-d7Z" id="lsO-lb-nUu"/>
                         <outlet property="hero2" destination="NJS-Qh-lWH" id="Nui-19-Nl2"/>
                         <outlet property="hero3" destination="q0j-ac-2ee" id="zDd-4G-eXi"/>
