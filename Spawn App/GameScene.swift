@@ -27,7 +27,7 @@ import GameplayKit
       backgroundColor = UIColor.white
         homeBase()
         
-       // grass()
+        grass()
         
         spawnEnemies()
         
@@ -75,7 +75,9 @@ import GameplayKit
                 hero1Button?.size = CGSize(width: 45, height: 45)
                 hero1Button?.position = CGPoint(x: (self.size.width * 0.10), y: (self.size.height * 0.70))
                 hero1Button?.zRotation = CGFloat.pi / 2
-                
+                hero1Button?.physicsBody?.categoryBitMask = PhysicsCategory.player
+                hero1Button?.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
+                hero1Button?.physicsBody?.collisionBitMask = PhysicsCategory.none
                 
                 addChild(hero1Button!)
             }
@@ -306,7 +308,7 @@ import GameplayKit
                 fireBall.physicsBody?.mass = 1
                 fireBall.physicsBody?.categoryBitMask = PhysicsCategory.fireBall
                 fireBall.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
-           //     fireBall.physicsBody?.collisionBitMask = PhysicsCategory.none
+                fireBall.physicsBody?.collisionBitMask = PhysicsCategory.none
                 fireBall.physicsBody?.isDynamic = true
                 fireBall.scale(to: CGSize(width: 35, height: 35))
                 fireBall.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
