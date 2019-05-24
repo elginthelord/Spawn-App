@@ -99,7 +99,9 @@ import GameplayKit
                 hero1Button?.size = CGSize(width: 45, height: 45)
                 hero1Button?.position = CGPoint(x: (self.size.width * 0.10), y: (self.size.height * 0.70))
                 hero1Button?.zRotation = CGFloat.pi / 2
-                
+                hero1Button?.physicsBody?.categoryBitMask = PhysicsCategory.player
+                hero1Button?.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
+                hero1Button?.physicsBody?.collisionBitMask = PhysicsCategory.none
                 
                 addChild(hero1Button!)
             }
@@ -146,7 +148,11 @@ import GameplayKit
                 hero2.physicsBody?.categoryBitMask = PhysicsCategory.player
                 hero2.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
                 hero2.physicsBody?.collisionBitMask = PhysicsCategory.none
-                
+                var actionMove = SKAction.move(to: CGPoint(x:  hero2.position.x, y:  (hero2.position.y * -1)), duration: TimeInterval(CGFloat.random(in: 5...10)))
+                let actionMoveDone = SKAction.removeFromParent()
+                let wait10 = SKAction.wait(forDuration: 10)
+                let wait5 = SKAction.wait(forDuration: 5)
+                hero2.run(SKAction.sequence([actionMove, actionMoveDone]))
                 addChild(hero2)
             }
             
@@ -166,7 +172,12 @@ import GameplayKit
                 hero3.physicsBody?.categoryBitMask = PhysicsCategory.player
                 hero3.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
                 hero3.physicsBody?.collisionBitMask = PhysicsCategory.none
-                
+                var actionMove = SKAction.move(to: CGPoint(x:   hero3.position.x, y:  (hero3.position.y * -1)), duration: TimeInterval(CGFloat.random(in: 5...10)))
+                let actionMoveDone = SKAction.removeFromParent()
+                let wait10 = SKAction.wait(forDuration: 10)
+                let wait5 = SKAction.wait(forDuration: 5)
+                hero3.run(SKAction.sequence([actionMove, actionMoveDone]))
+
                 addChild(hero3)
             }
             

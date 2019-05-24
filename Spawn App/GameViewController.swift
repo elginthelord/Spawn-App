@@ -1,10 +1,4 @@
-//
-//  GameViewController.swift
-//  Spawn App
-//
-//  Created by LORD ELGIN RAGUERO on 4/25/19.
-//  Copyright © 2019 CLC. All rights reserved.
-//
+
 
 import UIKit
 import SpriteKit
@@ -162,7 +156,7 @@ class GameViewController: UIViewController {
     @IBOutlet var hero1: UIButton!
     @IBOutlet var hero2: UIButton!
     
-    
+  
     
     
     
