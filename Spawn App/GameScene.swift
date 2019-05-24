@@ -10,6 +10,7 @@ import GameplayKit
         static let player: UInt32 = 1
         static let enemies: UInt32 = 2 // #1
         static let fireBall: UInt32 = 4 // #2
+        static let base: UInt32 = 8
      
 }
         class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -17,21 +18,26 @@ import GameplayKit
     var player = SKSpriteNode(imageNamed: "hero1")
     
             var hero1Button: SKSpriteNode?
-            
+            var have = false
+            var target = SKSpriteNode()
             var money: Int = 200
+            var baseHealth: SKLabelNode!
+            var health = 5
+            
             
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         hero1Buttonz()
-        
+        baseBaseHealth()
       backgroundColor = UIColor.white
         homeBase()
         
-       // grass()
+        grass()
         
         spawnEnemies()
         
         yourMoney()
+        
         
         run(SKAction.repeatForever(
             SKAction.sequence([SKAction.run(spawnEnemies),SKAction.wait(forDuration: 2.0)])))
@@ -57,19 +63,37 @@ import GameplayKit
             }
             
             override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+              
+         
+               
                 for touch in touches {
+                    
                     let location = touch.location(in: self)
                     money = Int(currency.text!)!
                     if (hero1Button?.contains(location))!{
                         hero1()
-                        
+                     
+                      
+                        hero1Button?.color = UIColor.black
+                        hero1Button?.colorBlendFactor = 0.2
                         currency.text = "\(money - 50)"
                         
                     }
+                    
                 }
             }
     
-            
+            func baseBaseHealth(){
+                baseHealth = SKLabelNode(fontNamed: "Times New Roman")
+                baseHealth.horizontalAlignmentMode = .right
+                baseHealth.verticalAlignmentMode = .center
+                baseHealth.zRotation = CGFloat.pi/2
+                baseHealth.text = "\(health)"
+                baseHealth.position = CGPoint(x: 135, y: 615)
+                baseHealth.fontColor = UIColor.black
+                addChild(baseHealth)
+            }
+
             func hero1Buttonz(){
                 hero1Button = SKSpriteNode(imageNamed: "hero1")
                 hero1Button?.size = CGSize(width: 45, height: 45)
@@ -85,10 +109,6 @@ import GameplayKit
                 var hero1 = SKSpriteNode(imageNamed: "hero1")
                 
                 
-              
-               
-                
-               
               
                 hero1.scale(to: CGSize(width: 50, height: 50))
                 
@@ -151,27 +171,7 @@ import GameplayKit
             }
             
             
-            
-         /*   func hero4(){
-                var hero4 = SKSpriteNode(imageNamed: "hero4")
-                
-           //     var xrandom = CGFloat.random(in: 0.60...0.80)
-                
-           //     var xaxis = CGFloat(self.size.width * xrandom)
-                
-                hero4.position = CGPoint(x: (self.size.width * 0.50), y: (self.size.height * 0.90))
-                   hero4.scale(to: CGSize(width: 50, height: 50))
-                
-                  hero4.zRotation = CGFloat.pi / 2
-                
-                hero4.physicsBody?.categoryBitMask = PhysicsCategory.player
-                hero4.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
-                hero4.physicsBody?.collisionBitMask = PhysicsCategory.none
-                
-                addChild(hero4)
-            }
-            */
-            
+    
             
             
           
@@ -204,15 +204,18 @@ import GameplayKit
                 enemy2.physicsBody? = SKPhysicsBody(rectangleOf: enemy2.size)
                 
                 
-                enemy1.physicsBody?.categoryBitMask = PhysicsCategory.enemies
-                enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.player
-                enemy1.physicsBody?.categoryBitMask = PhysicsCategory.none
-                enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
                 
+                
+                enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.player
+                enemy1.physicsBody?.categoryBitMask = PhysicsCategory.enemies
+                enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
+                enemy1.physicsBody?.contactTestBitMask = PhysicsCategory.base
+                enemy1.physicsBody?.collisionBitMask = PhysicsCategory.none
                 
                 enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.fireBall
                 enemy2.physicsBody?.categoryBitMask = PhysicsCategory.enemies
                 enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.player
+                enemy2.physicsBody?.contactTestBitMask = PhysicsCategory.base
                 enemy2.physicsBody?.collisionBitMask = PhysicsCategory.none
                 
                 
@@ -253,18 +256,24 @@ import GameplayKit
             func homeBase(){
                 let homebase = SKSpriteNode(imageNamed: "homeImage")
                 homebase.position = CGPoint(x: 200, y: 620)
-                homebase.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: homebase.size.width, height: homebase.size.height))
+                
+                homebase.physicsBody = SKPhysicsBody(rectangleOf: homebase.size)
+                
                 homebase.scale(to: CGSize(width: 120, height: 120))
-                homebase.physicsBody?.mass = 100000
-                homebase.physicsBody?.collisionBitMask = PhysicsCategory.enemies
-                homebase.physicsBody?.categoryBitMask = PhysicsCategory.none
-                homebase.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
+                
+                homebase.physicsBody?.mass = 1
                 homebase.physicsBody?.collisionBitMask = PhysicsCategory.none
+                homebase.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
+                homebase.physicsBody?.categoryBitMask = PhysicsCategory.base
+                
+                
+                
                 homebase.physicsBody?.isDynamic = true
                 homebase.physicsBody?.affectedByGravity = false
                 homebase.zRotation = CGFloat.pi/2
                 addChild(homebase)
             }
+            
             
             func grass(){
                 var grassIsNice = SKSpriteNode(imageNamed: "grass")
@@ -297,7 +306,7 @@ import GameplayKit
                 fireBall.physicsBody?.mass = 1
                 fireBall.physicsBody?.categoryBitMask = PhysicsCategory.fireBall
                 fireBall.physicsBody?.contactTestBitMask = PhysicsCategory.enemies
-           //     fireBall.physicsBody?.collisionBitMask = PhysicsCategory.none
+                fireBall.physicsBody?.collisionBitMask = PhysicsCategory.none
                 fireBall.physicsBody?.isDynamic = true
                 fireBall.scale(to: CGSize(width: 35, height: 35))
                 fireBall.position = CGPoint(x: (self.size.width * 0.60), y: (self.size.height * 0.90))
@@ -314,32 +323,57 @@ import GameplayKit
             }
     
             
-            func fireBallDidCollideWithEnemies(fireball: SKSpriteNode, enemies: SKSpriteNode, player: SKSpriteNode){
+            func fireBallDidCollideWithEnemies(fireball: SKSpriteNode, enemies: SKSpriteNode){
                 fireball.removeFromParent()
                 enemies.removeFromParent()
-                player.removeFromParent()
+                
             }
             
             
+        
+            func enemiesDidCollideWithBase(enemies: SKSpriteNode, base: SKSpriteNode){
+              health = Int(baseHealth.text!)!
+                
+                
+                
+                health = health - 1
+                
+                
+                 baseHealth.text = "\(health)"
+             
+                if (health - 1) >= 0 {
+                    enemies.removeFromParent()
+                } else if (health - 1) <= 0 {
+                    enemies.removeFromParent()
+                    base.removeFromParent()
+                }
+                
+               
+
+                
+                
+                
+            }
+     
             
             func didBegin(_ contact: SKPhysicsContact) {
-                print("Contact")
+                print("CONTACT")
                 let one = contact.bodyA
                 let two = contact.bodyB
-               
                 
                 
-                if let fireball = one.node as? SKSpriteNode, let enemies = two.node as? SKSpriteNode {
-                    fireBallDidCollideWithEnemies(fireball: fireball, enemies: enemies, player: player)
-                    
-                    
-                    
+                
+                
+                if let enemies = one.node as? SKSpriteNode, let base = two.node as? SKSpriteNode{
+            
+                    enemiesDidCollideWithBase(enemies: base, base: enemies)
                     
                 }
-              
                 
                 
+               
             }
+           
     
    /*
             func youCantBuy50(){
